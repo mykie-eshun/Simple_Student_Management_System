@@ -74,16 +74,15 @@ public class StudentManagementSystem {
                     System.out.println("Option: Remove existing student");
                     System.out.print("Enter first name of student: ");
                     search_by_first_name = scanner.next().toLowerCase();
-                    students.forEach((student) -> {
-                        if (Objects.equals(student.first_name, search_by_first_name)) {
-                            students.remove(student);
-//                            students.removeIf(Objects.equals(student.first_name, search_by_first_name));
-                            System.out.println("Student by name '" + search_by_first_name + "' has been successfully removed.");
-                        }
-                        else {
-                            System.out.println("Student by name '" + search_by_first_name + "' does not exist in our records.");
-                        }
-                    });
+
+                    boolean result = students.removeIf(student ->
+                            Objects.equals(student.first_name, search_by_first_name));
+
+                    if (result) {
+                        System.out.println("Student by name '" + search_by_first_name + "' has been successfully removed.");
+                    } else {
+                        System.out.println("Student by name '" + search_by_first_name + "' does not exist in our records.");
+                    }
                     System.out.println();
                     break;
                 }
